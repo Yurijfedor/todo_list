@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  selectVisibleTodos,
-  selectFilterValue,
-  selectTodos,
-} from 'redux/selectors';
-import { List } from '@mui/material';
+import { selectVisibleTodos, selectFilterValue } from 'redux/selectors';
+import { List, ButtonGroup, Button } from '@mui/material';
 import { Todo } from './todo';
 
 export const TodoList = () => {
@@ -13,8 +9,6 @@ export const TodoList = () => {
   const filterValue = useSelector(selectFilterValue);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  // const todos = useSelector(selectTodos);
-  // console.log(todos);
   useEffect(() => {
     setCurrentPage(1);
   }, [filterValue]);
@@ -36,17 +30,30 @@ export const TodoList = () => {
         ))}
       </List>
 
-      <div>
+      <ButtonGroup
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '4px',
+          justifyContent: 'center',
+        }}
+      >
         {Array.from({ length: pageCount }, (_, index) => (
-          <button
+          <Button
             key={index}
+            variant={currentPage === index + 1 ? 'contained' : 'outlined'}
+            color="primary"
             onClick={() => handlePageChange(index + 1)}
             disabled={currentPage === index + 1}
+            sx={{
+              borderRadius: '20px',
+              borderWidth: '2px',
+            }}
           >
             {index + 1}
-          </button>
+          </Button>
         ))}
-      </div>
+      </ButtonGroup>
     </>
   );
 };

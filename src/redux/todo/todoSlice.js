@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTodos, addTodo, editTodo } from './operations';
+import { fetchTodos, addTodo, editTodo, deleteTodo } from './operations';
 
 const todosInitialState = {
   items: [],
@@ -22,6 +22,9 @@ const todosSlice = createSlice({
       .addCase(editTodo.pending, state => {
         state.isLoading = true;
       })
+      .addCase(deleteTodo.pending, state => {
+        state.isLoading = true;
+      })
       .addCase(fetchTodos.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
@@ -31,6 +34,10 @@ const todosSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(editTodo.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteTodo.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
@@ -47,10 +54,18 @@ const todosSlice = createSlice({
       .addCase(editTodo.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
+        const updatedTodo = action.payload;
+        state.items = state.items.map(todo =>
+          todo.id === updatedTodo.id ? updatedTodo : todo
+        );
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
         const index = state.items.findIndex(
           ({ id }) => id === action.payload.id
         );
-        state.items[index].completed = action.payload.completed;
+        state.items.splice(index, 1);
       });
   },
 });

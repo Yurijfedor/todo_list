@@ -32,23 +32,24 @@ export const addTodo = createAsyncThunk(
   }
 );
 
-// export const deleteContact = createAsyncThunk(
-//   'contacts/deleteContact',
-//   async (id, thunkAPI) => {
-//     try {
-//       const response = await axios.delete(`/contacts/${id}`);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const deleteTodo = createAsyncThunk(
+  'todos/deleteTodo',
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/todos/${id}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 export const editTodo = createAsyncThunk(
   'todos/editTodo',
-  async ({ id, completed }, thunkAPI) => {
+  async (todo, thunkAPI) => {
     try {
-      const response = await axios.patch(`/todos/${id}`, { completed });
+      const response = await axios.patch(`/todos/${todo.id}`, todo);
+      console.log(response);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

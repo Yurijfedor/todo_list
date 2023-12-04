@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-// import { deleteContact } from '../../redux/contacts/operations';
+import { deleteTodo } from 'redux/todo/operations';
 import { ListItem, ListItemText, Button } from '@mui/material';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import { EditTodo } from './editModal';
@@ -28,13 +28,13 @@ export const Todo = ({ todoInfo }) => {
         }
       />
       <EditTodo todo={todoInfo} />
-      {/* <Button
+      <Button
         variant="contained"
         sx={{ height: 25, display: 'flex', alignItems: 'center' }}
-        onClick={() => dispatch(deleteContact(contactInfo.id))}
+        onClick={() => dispatch(deleteTodo(todoInfo.id))}
       >
         Delete
-      </Button> */}
+      </Button>
     </ListItem>
   );
 };

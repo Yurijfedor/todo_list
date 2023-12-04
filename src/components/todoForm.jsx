@@ -51,15 +51,17 @@ export const TodoForm = ({ currentTodo, setModalClose }) => {
 
   const onHandleSubmit = evt => {
     evt.preventDefault();
-    const todoCompleted = evt.target.completed.value;
+    const todoCompleted = evt.target.completed.value === 'true' ? true : false;
     const todoTitle = evt.target.title.value;
     const todo = {
       id: currentTodo.id,
       completed: todoCompleted,
       title: todoTitle,
+      userId: currentTodo.userId,
     };
     dispatch(editTodo(todo));
     setModalClose(false);
+    console.log(currentTodo);
   };
 
   const reset = () => {
