@@ -56,7 +56,7 @@ const todosSlice = createSlice({
         state.error = null;
         const updatedTodo = action.payload;
         state.items = state.items.map(todo =>
-          todo.id === updatedTodo.id ? updatedTodo : todo
+          todo.userId === updatedTodo.userId ? updatedTodo : todo
         );
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {

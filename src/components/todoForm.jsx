@@ -43,7 +43,7 @@ export const TodoForm = ({ currentTodo, setModalClose }) => {
     const todo = {
       completed: todoCompleted,
       title: todoTitle,
-      id: uuidv4(),
+      userId: uuidv4(),
     };
     dispatch(addTodo(todo));
     reset();

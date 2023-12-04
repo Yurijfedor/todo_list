@@ -17,13 +17,13 @@ export const fetchTodos = createAsyncThunk(
 
 export const addTodo = createAsyncThunk(
   'todos/addTodo',
-  async ({ id, title, completed }, thunkAPI) => {
+  async ({ id, title, completed, userId }, thunkAPI) => {
     try {
       const response = await axios.post('/todos', {
         id,
         title,
         completed,
-        userId: 1,
+        userId,
       });
       return response.data;
     } catch (e) {
@@ -48,7 +48,7 @@ export const editTodo = createAsyncThunk(
   'todos/editTodo',
   async (todo, thunkAPI) => {
     try {
-      const response = await axios.patch(`/todos/${todo.id}`, todo);
+      const response = await axios.patch(`/todos/${todo.userId}`, todo);
       console.log(response);
       return response.data;
     } catch (e) {
