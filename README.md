@@ -19,6 +19,15 @@ pagination, CRUD operations, custom design, and state management using Redux.
 4. Start the development server: npm start
 5. Open your browser and visit http://localhost:3000 to use the application.
 
+## Docker Containerization
+
+To run the application inside a Docker container, follow these steps:
+
+1. Build the Docker image: docker build -t react-todo-app .
+2. Run the Docker container: docker run -p 3000:3000 react-todo-app
+3. Open your browser and visit http://localhost:3000 to use the application
+   running inside the Docker container.
+
 ## Usage
 
 - Use the filters to search for specific tasks.
